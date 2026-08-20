@@ -4,6 +4,8 @@ Status: **Draft — awaiting baseline acceptance**
 
 ## First delivery: RFxPro vertical slice
 
+Behavioral completion is defined by [RFxPro Vertical-Slice Acceptance](vertical-slice-acceptance.md). Exact contracts and unresolved inputs are tracked in the planning decision register.
+
 In scope:
 
 - Android session creation using a client-generated stable UUID.
@@ -47,4 +49,3 @@ Sampling defaults, data retention, throughput/latency SLOs, exact supported RF f
 - Define batch size, retry/backoff, retention, and quota limits.
 - Define measurement units, nullability, timestamps, coordinate reference system, and quality flags.
 - Decide whether call tests are a separate experimental track or an RFxPro release requirement.
-

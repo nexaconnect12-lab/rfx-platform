@@ -30,7 +30,7 @@ Documentation and implementation ship in the same change. If no document changes
 ## 4. Technical agreements
 
 - Kotlin Android with an offline-first Room/WorkManager shared core; RFxPro first.
-- ASP.NET Core API plus .NET Worker Services.
+- ASP.NET Core as the main backend system plus .NET Worker Services, as accepted in ADR-001; source Node.js/Ktor/BullMQ examples are superseded.
 - Keycloak for human OIDC/OAuth2 identity; RFx backend for device identity and business authorization.
 - PostgreSQL 16/PostGIS as system of record; Redis-backed queue; MinIO object storage.
 - React/Leaflet with GeoServer, MapProxy, and policy-compliant OSM reuse.
@@ -48,8 +48,8 @@ An open issue states: the conflicting/unknown facts, source/version where known,
 
 ## Acceptance record
 
+- Acceptance checklist: `docs/09-planning/baseline-acceptance-checklist.md`
 - Baseline version/commit: TBD
 - Accepted by: TBD
 - Accepted on: TBD
 - Conditions/exceptions: TBD
-

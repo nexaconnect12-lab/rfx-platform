@@ -6,6 +6,10 @@ Status: **Draft — awaiting baseline acceptance**
 
 Review every document and ADR, resolve or explicitly defer blocking open issues, name approvers, and record acceptance. **No application source generation before this gate passes.**
 
+Resolved decision: ASP.NET Core is the main backend system and .NET Worker Services perform asynchronous/background processing (ADR-001, accepted 2026-08-20). Backend runtime selection no longer blocks the baseline; .NET version and implementation-library choices remain open.
+
+Gate artifacts: LLD reconciliation, planning decision register, vertical-slice acceptance specification, and documentation baseline acceptance checklist.
+
 ## Phase 1 — contracts and executable foundation
 
 After acceptance: establish repository structure, pinned toolchains, Docker Compose infrastructure, initial threat/data model, OpenAPI skeleton, migrations, observability conventions, and CI quality gates.
@@ -36,6 +40,6 @@ Every implementation change updates this roadmap’s status/dependencies and all
 
 ## Open issues
 
-- Define estimates, owners, milestones, pilot entry/exit criteria, and release governance.
+- Replace owner roles in the planning decision register with named people.
+- Define estimates, milestones, pilot entry/exit criteria, and release governance.
 - Decide which open architecture/contract issues block Phase 1 versus the RFxPro slice.
-

@@ -2,9 +2,11 @@
 
 Status: **Draft — awaiting baseline acceptance**
 
-## Decision direction
+## Accepted backend decision
 
-Use ASP.NET Core for the API and .NET Worker Services for asynchronous/background work. Start with clear modules and one principal API deployment rather than a broad microservice estate.
+Per accepted ADR-001, use ASP.NET Core as the main backend system and .NET Worker Services for asynchronous/background work. Start with clear modules and one principal API deployment rather than a broad microservice estate.
+
+RFxPro LLD v1.6 is the priority source input for first-delivery behavior and domain detail, but its Node.js, Express/Fastify, Kotlin/Ktor, BullMQ, and locally signed dashboard-JWT examples are superseded. They must be translated into the accepted .NET and Keycloak architecture rather than copied into implementation.
 
 ## Logical layers
 
@@ -32,8 +34,8 @@ Provisional model: `OPEN`, `UPLOAD_COMPLETE`, `PROCESSING`, `PROCESSED`, `FAILED
 
 ## Open issues
 
+- Pin the supported .NET SDK/runtime version.
 - Choose EF Core/data-access boundaries, queue implementation, outbox/inbox pattern, and job framework.
 - Approve exact session state machine and recovery/admin operations.
 - Decide synchronous versus asynchronous ingestion thresholds and response contracts.
 - Define service SLOs, rate limits, health/readiness semantics, and telemetry platform.
-

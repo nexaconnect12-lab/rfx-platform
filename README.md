@@ -21,7 +21,7 @@ No application source code may be generated until this baseline has been reviewe
 | Area | Direction |
 |---|---|
 | Android | Kotlin; shared core for RFxPro, RFx Lite, and future SDK; Room; WorkManager; offline-first |
-| Backend | ASP.NET Core API and .NET Worker Services |
+| Backend | ASP.NET Core is the accepted main backend system; .NET Worker Services handle asynchronous/background processing (ADR-001) |
 | Human identity | Keycloak with OIDC/OAuth 2.0 |
 | Device identity | Owned by the RFx backend |
 | Data | PostgreSQL 16 with PostGIS |
@@ -35,12 +35,15 @@ No application source code may be generated until this baseline has been reviewe
 
 - [Project charter](docs/00-product/project-charter.md)
 - [Scope](docs/01-requirements/scope.md)
+- [RFxPro vertical-slice acceptance](docs/01-requirements/vertical-slice-acceptance.md)
 - [System overview](docs/02-architecture/system-overview.md)
 - [Engineering agreement](docs/08-standards/engineering-agreement.md)
 - [Implementation roadmap](docs/07-roadmap/implementation-roadmap.md)
+- [LLD reconciliation](docs/09-planning/lld-reconciliation.md)
+- [Planning decision register](docs/09-planning/decision-register.md)
+- [Baseline acceptance checklist](docs/09-planning/baseline-acceptance-checklist.md)
 - [Architecture decisions](docs/11-adr/)
 
 ## Governance
 
 Implementation is not complete until all affected documentation—including ADRs, API contracts, schemas, architecture, testing, and roadmap/status—is updated in the same change. See `AGENTS.md` and the engineering agreement.
-

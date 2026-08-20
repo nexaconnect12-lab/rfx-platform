@@ -42,5 +42,4 @@ Quantitative targets remain to be approved. Initial acceptance must demonstrate 
 
 - Define named approver(s) and the explicit baseline-acceptance record.
 - Approve measurable product/service SLOs, supported countries/operators, privacy retention, and pilot device matrix.
-- Reconcile terminology and version differences across the source HLD and LLD.
-
+- Reconcile terminology and version differences across the source HLD and LLD. RFxPro LLD v1.6 is the priority first-delivery input and HLD v2.1 primarily informs future work; neither overrides accepted ADR-001's .NET backend decision.
