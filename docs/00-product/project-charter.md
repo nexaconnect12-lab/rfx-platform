@@ -2,6 +2,8 @@
 
 Status: **Draft — awaiting baseline acceptance**
 
+The narrative product definition is maintained in [RFx Platform Project Description](project-description.md).
+
 ## Purpose
 
 RFx Platform provides a shared foundation for collecting RF and location measurements on Android devices, retaining them safely while offline, synchronizing them reliably, processing them asynchronously, storing/querying them geospatially, and presenting them to engineers and operators.

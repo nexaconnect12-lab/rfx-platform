@@ -1,0 +1,283 @@
+openapi: 3.0.3
+info:
+  title: RFx Platform First-Slice API
+  version: 0.1.0-proposed
+  description: >-
+    Proposed contract for baseline review. It is documentation, not implementation
+    authorization. Numeric limits and final security/bootstrap details remain TBD.
+servers:
+  - url: https://api.example.invalid
+    description: Placeholder only; deployment hostname is not approved.
+tags:
+  - name: Devices
+  - name: Sessions
+  - name: Ingestion
+paths:
+  /v1/device-registrations:
+    post:
+      tags: [Devices]
+      summary: Exchange an approved bootstrap credential for a device credential
+      operationId: registerDevice
+      security:
+        - bootstrapBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceRegistrationRequest'
+      responses:
+        '201':
+          description: Device registered; credential is returned once
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceRegistrationResponse'
+        '400': {$ref: '#/components/responses/Problem'}
+        '401': {$ref: '#/components/responses/Problem'}
+        '409': {$ref: '#/components/responses/Problem'}
+  /v1/sessions:
+    post:
+      tags: [Sessions]
+      summary: Create or return a client-identified session
+      operationId: createSession
+      security:
+        - deviceBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+      responses:
+        '201':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResource'
+        '200':
+          description: Identical session already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResource'
+        '400': {$ref: '#/components/responses/Problem'}
+        '401': {$ref: '#/components/responses/Problem'}
+        '403': {$ref: '#/components/responses/Problem'}
+        '409': {$ref: '#/components/responses/Problem'}
+  /v1/sessions/{sessionId}/measurement-batches:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+    post:
+      tags: [Ingestion]
+      summary: Durably admit an idempotent measurement batch
+      operationId: admitMeasurementBatch
+      security:
+        - deviceBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MeasurementBatchRequest'
+      responses:
+        '202':
+          description: Batch durably admitted or identical batch previously admitted
+          headers:
+            Location:
+              schema: {type: string}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResource'
+        '400': {$ref: '#/components/responses/Problem'}
+        '401': {$ref: '#/components/responses/Problem'}
+        '403': {$ref: '#/components/responses/Problem'}
+        '409': {$ref: '#/components/responses/Problem'}
+        '413': {$ref: '#/components/responses/Problem'}
+        '429': {$ref: '#/components/responses/Problem'}
+  /v1/sessions/{sessionId}/measurement-batches/{batchId}:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+      - $ref: '#/components/parameters/BatchId'
+    get:
+      tags: [Ingestion]
+      summary: Get processing status for an admitted batch
+      operationId: getMeasurementBatch
+      security:
+        - deviceBearer: []
+      responses:
+        '200':
+          description: Current batch resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResource'
+        '401': {$ref: '#/components/responses/Problem'}
+        '403': {$ref: '#/components/responses/Problem'}
+        '404': {$ref: '#/components/responses/Problem'}
+  /v1/sessions/{sessionId}/upload-completion:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+    put:
+      tags: [Sessions]
+      summary: Declare client upload completion without implying processing completion
+      operationId: completeSessionUpload
+      security:
+        - deviceBearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [completedAt]
+              properties:
+                completedAt: {type: string, format: date-time}
+      responses:
+        '200':
+          description: Updated session resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResource'
+        '401': {$ref: '#/components/responses/Problem'}
+        '403': {$ref: '#/components/responses/Problem'}
+        '404': {$ref: '#/components/responses/Problem'}
+components:
+  securitySchemes:
+    bootstrapBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: opaque-one-time-bootstrap
+    deviceBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: opaque-device-token
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      schema: {type: string, format: uuid}
+    BatchId:
+      name: batchId
+      in: path
+      required: true
+      schema: {type: string, format: uuid}
+  responses:
+    Problem:
+      description: Problem details response
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+  schemas:
+    DeviceRegistrationRequest:
+      type: object
+      additionalProperties: false
+      required: [installationId, clientType, accessLevel, device]
+      properties:
+        installationId: {type: string, format: uuid}
+        clientType: {type: string, enum: [rfxpro]}
+        accessLevel: {type: string, enum: [open, developer]}
+        device:
+          type: object
+          additionalProperties: false
+          required: [manufacturer, model, androidApiLevel]
+          properties:
+            manufacturer: {type: string}
+            model: {type: string}
+            androidApiLevel: {type: integer, minimum: 1}
+    DeviceRegistrationResponse:
+      type: object
+      additionalProperties: false
+      required: [deviceId, accessToken, tokenType, issuedAt]
+      properties:
+        deviceId: {type: string, format: uuid}
+        accessToken: {type: string, writeOnly: true}
+        tokenType: {type: string, enum: [Bearer]}
+        issuedAt: {type: string, format: date-time}
+    CreateSessionRequest:
+      type: object
+      additionalProperties: false
+      required: [sessionId, schemaVersion, startedAt, projectId]
+      properties:
+        sessionId: {type: string, format: uuid}
+        schemaVersion: {type: string}
+        startedAt: {type: string, format: date-time}
+        projectId: {type: string, format: uuid}
+    SessionResource:
+      type: object
+      additionalProperties: false
+      required: [sessionId, deviceId, projectId, uploadState, processingState]
+      properties:
+        sessionId: {type: string, format: uuid}
+        deviceId: {type: string, format: uuid}
+        projectId: {type: string, format: uuid}
+        uploadState: {type: string, enum: [OPEN, UPLOAD_COMPLETE]}
+        processingState: {type: string, enum: [PENDING, PROCESSING, PROCESSED, FAILED]}
+    MeasurementBatchRequest:
+      type: object
+      additionalProperties: false
+      required: [batchId, schemaVersion, capturedFrom, capturedThrough, observations]
+      properties:
+        batchId: {type: string, format: uuid}
+        schemaVersion: {type: string}
+        capturedFrom: {type: string, format: date-time}
+        capturedThrough: {type: string, format: date-time}
+        observations:
+          type: array
+          minItems: 1
+          description: Maximum item count is TBD before baseline acceptance.
+          items: {$ref: '#/components/schemas/MeasurementObservation'}
+    MeasurementObservation:
+      type: object
+      additionalProperties: false
+      required: [observationId, capturedAt, location, rat, capability]
+      properties:
+        observationId: {type: string, format: uuid}
+        capturedAt: {type: string, format: date-time}
+        location: {$ref: '#/components/schemas/Location'}
+        rat: {type: string, enum: [GSM, WCDMA, LTE, NR, UNKNOWN]}
+        capability: {type: string, enum: [OPEN, DEVELOPER]}
+        servingCellId: {type: string, nullable: true}
+        pci: {type: integer, nullable: true}
+        arfcn: {type: integer, nullable: true}
+        rsrpDbm: {type: number, nullable: true}
+        rsrqDb: {type: number, nullable: true}
+        sinrDb: {type: number, nullable: true}
+    Location:
+      type: object
+      additionalProperties: false
+      required: [latitude, longitude]
+      properties:
+        latitude: {type: number, minimum: -90, maximum: 90}
+        longitude: {type: number, minimum: -180, maximum: 180}
+        horizontalAccuracyM: {type: number, minimum: 0, nullable: true}
+        altitudeM: {type: number, nullable: true}
+    BatchResource:
+      type: object
+      additionalProperties: false
+      required: [sessionId, batchId, state, admittedAt, correlationId]
+      properties:
+        sessionId: {type: string, format: uuid}
+        batchId: {type: string, format: uuid}
+        state: {type: string, enum: [ADMITTED, PROCESSING, PROCESSED, REJECTED, DEAD_LETTER]}
+        admittedAt: {type: string, format: date-time}
+        processedAt: {type: string, format: date-time, nullable: true}
+        attemptCount: {type: integer, minimum: 0}
+        errorCode: {type: string, nullable: true}
+        correlationId: {type: string}
+    ProblemDetails:
+      type: object
+      required: [type, title, status, code, correlationId]
+      properties:
+        type: {type: string, format: uri-reference}
+        title: {type: string}
+        status: {type: integer}
+        detail: {type: string}
+        code: {type: string}
+        correlationId: {type: string}

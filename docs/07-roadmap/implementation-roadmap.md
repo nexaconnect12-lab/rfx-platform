@@ -10,6 +10,8 @@ Resolved decision: ASP.NET Core is the main backend system and .NET Worker Servi
 
 Gate artifacts: LLD reconciliation, planning decision register, vertical-slice acceptance specification, and documentation baseline acceptance checklist.
 
+Milestone ownership, entry/exit evidence, and required role assignments are defined in the [Delivery Ownership and Milestone Plan](../09-planning/delivery-ownership-plan.md).
+
 ## Phase 1 — contracts and executable foundation
 
 After acceptance: establish repository structure, pinned toolchains, Docker Compose infrastructure, initial threat/data model, OpenAPI skeleton, migrations, observability conventions, and CI quality gates.

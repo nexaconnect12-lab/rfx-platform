@@ -33,15 +33,28 @@ No application source code may be generated until this baseline has been reviewe
 
 ## Documentation map
 
+- [Project description](docs/00-product/project-description.md)
 - [Project charter](docs/00-product/project-charter.md)
 - [Scope](docs/01-requirements/scope.md)
 - [RFxPro vertical-slice acceptance](docs/01-requirements/vertical-slice-acceptance.md)
 - [System overview](docs/02-architecture/system-overview.md)
+- [Device identity](docs/02-architecture/device-identity.md)
+- [Tenancy and authorization model](docs/02-architecture/tenancy-authorization-model.md)
+- [First-slice threat model](docs/02-architecture/threat-model.md)
+- [First-slice API contract](docs/03-api/first-slice-contract.md)
+- [Proposed OpenAPI](docs/03-api/openapi.yaml)
+- [Measurement dictionary](docs/03-api/measurement-dictionary.md)
+- [First-slice logical data model](docs/04-database/logical-data-model.md)
+- [Toolchain selection](docs/05-development/toolchain-selection.md)
+- [Vertical-slice test matrix](docs/06-testing/vertical-slice-test-matrix.md)
 - [Engineering agreement](docs/08-standards/engineering-agreement.md)
 - [Implementation roadmap](docs/07-roadmap/implementation-roadmap.md)
 - [LLD reconciliation](docs/09-planning/lld-reconciliation.md)
 - [Planning decision register](docs/09-planning/decision-register.md)
+- [Delivery ownership and milestones](docs/09-planning/delivery-ownership-plan.md)
 - [Baseline acceptance checklist](docs/09-planning/baseline-acceptance-checklist.md)
+- [Operational readiness](docs/10-operations/operational-readiness.md)
+- [Privacy and data lifecycle](docs/10-operations/privacy-data-lifecycle.md)
 - [Architecture decisions](docs/11-adr/)
 
 ## Governance

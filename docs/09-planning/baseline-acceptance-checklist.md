@@ -10,8 +10,8 @@ This is the review gate that determines whether the repository contains enough a
 
 - [ ] Name the baseline approver(s) and reviewers.
 - [ ] Record the exact commit proposed for acceptance.
-- [ ] Confirm RFxPro LLD v1.6 reconciliation is complete for first-delivery topics.
-- [ ] Confirm HLD v2.1 future work does not implicitly expand first-delivery scope.
+- [x] RFxPro LLD v1.6 reconciliation document exists for first-delivery topics; human confirmation remains required.
+- [x] HLD v2.1 future work is explicitly prevented from implicitly expanding first-delivery scope; human confirmation remains required.
 - [ ] Record accepted exceptions, deferred decisions, owners, and blocking milestones.
 - [ ] Complete the engineering-agreement acceptance record.
 
@@ -33,34 +33,34 @@ This is the review gate that determines whether the repository contains enough a
 ## D. Contracts and data
 
 - [ ] Resolve DR-003 through DR-005.
-- [ ] Produce and review the initial OpenAPI contract and examples.
-- [ ] Produce and review the canonical measurement dictionary.
+- [x] Produce the initial OpenAPI contract; human review/acceptance remains required.
+- [x] Produce the canonical measurement dictionary; RF/domain review/acceptance remains required.
 - [ ] Approve the logical first-slice data model, tenancy keys, idempotency constraints, and processing states.
 - [ ] Confirm source LLD DDL is not treated as approved migration content.
 
 ## E. Identity, security, and privacy
 
 - [ ] Resolve DR-006, DR-007, and DR-014.
-- [ ] Document device bootstrap, storage, rotation, revocation, and recovery.
+- [x] Document the recommended device bootstrap, storage, rotation, revocation, and recovery model; policy values and approval remain required.
 - [ ] Approve the initial tenant/role/permission matrix.
-- [ ] Complete a first-slice threat model and abuse cases.
+- [x] Produce a first-slice threat model and abuse cases; security/privacy review remains required.
 - [ ] Approve sensitive-data logging/redaction, retention, deletion, export, and test-data rules.
 
 ## F. Engineering and operations
 
 - [ ] Resolve the project-initialization portions of DR-008 through DR-013.
 - [ ] Pin required SDK, build-tool, and container versions.
-- [ ] Define CI gates and evidence retention.
-- [ ] Define health/readiness, logs, metrics, traces, and minimum alerting for the vertical slice.
+- [x] Define proposed CI/test gates and evidence categories; thresholds and retention approval remain required.
+- [x] Define proposed health/readiness, logs, metrics, traces, and minimum signals; platform and alert thresholds remain required.
 - [ ] Define configuration and secret-management rules for local/integration environments.
 - [ ] Define the minimum backup/restore expectations for pilot data before pilot rollout.
 
 ## G. Test and delivery plan
 
 - [ ] Approve the supported real-device matrix and RF validation method.
-- [ ] Map VS-01 through VS-12 to automated or named manual tests.
-- [ ] Assign roadmap phases, milestones, dependencies, and entry/exit owners.
-- [ ] Define pilot entry/exit criteria and release authority.
+- [x] Map VS-01 through VS-12 to automation targets and manual evidence; named assignments remain required.
+- [x] Define roadmap milestone gates, dependencies, and owner roles; names/dates/estimates remain required.
+- [x] Define proposed pilot entry/exit criteria; release authority remains TBD.
 - [ ] Record risks whose acceptance is required for the first slice.
 
 ## Acceptance record
@@ -73,4 +73,3 @@ This is the review gate that determines whether the repository contains enough a
 - Decision-register snapshot: TBD
 
 Until this record is completed, documentation-only work is permitted but application source, executable scaffolding, migrations, and deployable infrastructure remain prohibited.
-

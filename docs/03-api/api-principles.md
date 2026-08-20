@@ -6,6 +6,8 @@ Status: **Draft — awaiting baseline acceptance**
 
 OpenAPI is the canonical HTTP contract once implementation begins. API changes update OpenAPI, examples, consumers, tests, and this documentation in the same change. Do not infer a contract only from controller code.
 
+The proposed first-slice contract is recorded in [First-Slice API Contract](first-slice-contract.md) and [OpenAPI](openapi.yaml). It is subject to baseline acceptance.
+
 ## Conventions
 
 - HTTPS JSON APIs with explicit media type and API version strategy.
@@ -30,8 +32,8 @@ Devices/registration, sessions, measurement batches, batch status, session uploa
 
 ## Open issues
 
-- Approve path/version convention, error catalog, pagination, compression, payload limits, and timestamp precision.
-- Define canonical measurement payload and units/nullability.
+- Approve the proposed `/v1` path/version convention, status semantics, and error model.
+- Approve compression, payload/rate limits, and timestamp precision/skew.
+- Approve the canonical [measurement dictionary](measurement-dictionary.md), including RAT-specific normalization and quality flags.
 - Define idempotency record retention and behavior after retention expiry.
-- Decide upload acknowledgements and safe local cleanup contract.
-
+- Approve the recommended durable acknowledgement and safe local cleanup contract.

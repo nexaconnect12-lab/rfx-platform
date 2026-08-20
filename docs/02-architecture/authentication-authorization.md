@@ -12,11 +12,13 @@ Keycloak is the identity provider for administrators, engineers, viewers, and la
 
 RFx backend services own device registration, credentials, status, rotation/revocation, client type, and access level for RFxPro, Lite, SDK installations, and SmartCare/RTP devices. Devices are not modeled as ordinary human Keycloak users.
 
+The proposed first-slice lifecycle uses an opaque device credential and is detailed in [Device Identity and Credential Lifecycle](device-identity.md).
+
 ## Authorization
 
 Keycloak roles provide coarse human roles. The backend remains authoritative for tenant, organization, operator, project, session, device, and data permissions. A Keycloak subject maps to an RFx user profile; every resource query must apply the relevant tenancy scope.
 
-Provisional roles: `admin`, `engineer`, `viewer`, and `operator-admin`. The exact permission matrix is unresolved.
+The recommended hierarchy and initial role matrix are defined in [Tenancy and Authorization Model](tenancy-authorization-model.md). Role names and support-access policy remain subject to product/security approval.
 
 ## Security rules
 
@@ -29,9 +31,8 @@ Provisional roles: `admin`, `engineer`, `viewer`, and `operator-admin`. The exac
 
 ## Open issues
 
-- Device credential format: opaque token versus separately issued JWT; rotation/bootstrap/recovery flows.
+- Approve the proposed opaque device credential and bootstrap/rotation/recovery details.
 - Keycloak realm/client topology, audience model, role/claim mapping, MFA, and service identities.
-- Tenant model and cross-tenant administrative access.
+- Approve the proposed tenant/project hierarchy and cross-tenant support-access policy.
 - Whether mobile human login is needed in addition to device identity.
 - Data-export authorization and audit retention.
-

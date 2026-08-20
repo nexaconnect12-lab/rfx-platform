@@ -32,9 +32,10 @@ Testing follows risk: measurement correctness, offline durability, idempotency, 
 
 Each implementation records automated results and any manual/device evidence. Device, OS, app build, permissions, operator/network, time, and reference tool/version are captured for RF validation.
 
+The first-slice scenario-to-test ownership map is maintained in [Vertical-Slice Test Matrix](vertical-slice-test-matrix.md).
+
 ## Open issues
 
 - Approve reference equipment/tolerances, supported-device matrix, SLOs, data volumes, and CI environment.
 - Define privacy-safe test datasets and synthetic fixtures.
 - Decide release-blocking coverage thresholds and ownership of manual field tests.
-

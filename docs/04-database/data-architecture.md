@@ -23,6 +23,8 @@ Keycloak uses its own database or isolated Keycloak-owned schema and migrations.
 
 This is a conceptual list, not approved DDL.
 
+The first-slice entities, invariants, and recommended transactional-outbox handoff are refined in [First-Slice Logical Data Model](logical-data-model.md). That document remains logical design, not migration authorization.
+
 ## Data rules
 
 - Use migrations; never mutate production schemas manually.
@@ -35,8 +37,7 @@ This is a conceptual list, not approved DDL.
 ## Open issues
 
 - Reconcile source DDL versions and missing operational tables; do not select one silently.
-- Approve tenancy keys, authoritative session ID, ingestion uniqueness constraint, and measurement primary-key strategy.
+- Approve the proposed tenant keys, authoritative client session ID, ingestion uniqueness constraint, and observation identity; physical primary-key strategy remains TBD.
 - Approve SRID and representation for GPS uncertainty, altitude, and invalid fixes.
 - Establish privacy classification and location-data retention/deletion policy.
 - Define partitioning, archival, backup/restore objectives, and MinIO lifecycle.
-

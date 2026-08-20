@@ -16,6 +16,8 @@ This document records the intended environment only. Do not initialize applicati
 - At least one real supported Android phone; multiple OEM/API levels are strongly recommended.
 - Optional database/API clients such as DBeaver and a repository-stored API client collection.
 
+Exact selection and approval fields are maintained in [Toolchain Selection Record](toolchain-selection.md).
+
 ## Local services after acceptance
 
 Docker Compose will provide PostgreSQL 16/PostGIS, Redis, MinIO, Keycloak, API, worker, and later GeoServer, MapProxy, and dashboard services. Developers should not depend on individually installed Windows server instances.
@@ -37,4 +39,3 @@ After project initialization is approved, the first environment check is service
 - Pin .NET SDK, Android toolchain, Node/pnpm (for React), container image versions, and supported host OS versions.
 - Decide whether the canonical repository location is Windows or the WSL filesystem; prior guidance preferred WSL while the selected folder is `D:\DevOps\rfx-platform`.
 - Approve local domain/TLS, port allocation, secret management, and seed identity strategy.
-
