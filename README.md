@@ -21,13 +21,13 @@ No application source code may be generated until this baseline has been reviewe
 | Area | Direction |
 |---|---|
 | Android | Kotlin; shared core for RFxPro, RFx Lite, and future SDK; Room; WorkManager; offline-first |
-| Backend | ASP.NET Core is the accepted main backend system; .NET Worker Services handle asynchronous/background processing (ADR-001) |
+| Backend | ASP.NET Core modular monolith plus separately deployable .NET Worker Services, using pragmatic Domain-Driven Design (ADR-001, ADR-008, ADR-009) |
 | Human identity | Keycloak with OIDC/OAuth 2.0 |
 | Device identity | Owned by the RFx backend |
 | Data | PostgreSQL 16 with PostGIS |
 | Async work | Redis-backed queue |
 | Objects | MinIO |
-| Web maps | React, Leaflet, GeoServer, MapProxy, and reused OSM data/tiles subject to policy |
+| Web dashboard | React with TypeScript and Ant Design; React Leaflet/Leaflet for maps; GeoServer, MapProxy, and reused OSM data/tiles subject to policy |
 | Local deployment | Docker Compose |
 | Delivery | Open/Developer capabilities first; Diag deferred; RFxPro vertical slice first |
 

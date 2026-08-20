@@ -6,17 +6,23 @@ Status: **Draft — awaiting baseline acceptance**
 
 Per accepted ADR-001, use ASP.NET Core as the main backend system and .NET Worker Services for asynchronous/background work. Start with clear modules and one principal API deployment rather than a broad microservice estate.
 
+Per accepted ADR-008, use Domain-Driven Design as the principal backend design approach. Per accepted ADR-009, model those responsibilities inside an initial modular monolith/API plus separately deployable .NET workers. Microservice extraction requires evidence and a new ADR.
+
 RFxPro LLD v1.6 is the priority source input for first-delivery behavior and domain detail, but its Node.js, Express/Fastify, Kotlin/Ktor, BullMQ, and locally signed dashboard-JWT examples are superseded. They must be translated into the accepted .NET and Keycloak architecture rather than copied into implementation.
 
 ## Logical layers
 
 - **API/transport:** HTTP, authentication scheme selection, request validation, rate/size limits, problem responses.
 - **Application:** use cases, authorization policies, transactions, idempotency coordination.
-- **Domain:** sessions, devices, ingestion batches, measurements, processing states, exports, and tenant rules.
+- **Domain:** aggregates, entities, value objects, domain services/events, sessions, devices, ingestion batches, measurement rules, processing states, exports, and tenant rules.
 - **Infrastructure:** PostgreSQL/PostGIS, Redis queue, MinIO, Keycloak validation, telemetry.
 - **Workers:** durable job consumption, parsing/transformation, dead-letter handling, derived data, export/report work.
 
 Dependencies point inward; domain logic must not depend directly on controllers, EF Core, Redis, MinIO, or Keycloak SDK types.
+
+Initial candidate modules are Identity and Access, Device Management, Collection Sessions, Ingestion, Measurements, and later Exports/Reporting. These logical boundaries do not imply separate microservices or databases. Detailed modeling follows ADR-008.
+
+Modules own their writes and business behavior. Cross-module interaction uses explicit application contracts, stable identities, or documented events. Sharing one RFx PostgreSQL database does not permit unrestricted access to another module's internal tables or aggregate state. Architecture tests must enforce dependency direction after initialization.
 
 ## Ingestion lifecycle
 
@@ -35,7 +41,8 @@ Provisional model: `OPEN`, `UPLOAD_COMPLETE`, `PROCESSING`, `PROCESSED`, `FAILED
 ## Open issues
 
 - Pin the supported .NET SDK/runtime version.
-- Choose EF Core/data-access boundaries, queue implementation, outbox/inbox pattern, and job framework.
+- Choose EF Core/data-access and module transaction boundaries, queue implementation, outbox/inbox implementation, and job framework.
+- Approve the initial aggregate boundaries and ubiquitous-language glossary through first-slice use-case modeling.
 - Approve exact session state machine and recovery/admin operations.
 - Decide synchronous versus asynchronous ingestion thresholds and response contracts.
 - Define service SLOs, rate limits, health/readiness semantics, and telemetry platform.

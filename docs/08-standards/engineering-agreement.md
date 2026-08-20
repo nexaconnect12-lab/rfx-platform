@@ -31,9 +31,11 @@ Documentation and implementation ship in the same change. If no document changes
 
 - Kotlin Android with an offline-first Room/WorkManager shared core; RFxPro first.
 - ASP.NET Core as the main backend system plus .NET Worker Services, as accepted in ADR-001; source Node.js/Ktor/BullMQ examples are superseded.
+- Domain-Driven Design for backend domain/module boundaries and business rules, applied pragmatically within the modular monolith and workers; DDD does not imply microservices, event sourcing, or universal CQRS (ADR-008).
+- One principal ASP.NET Core modular monolith plus separately deployable .NET workers initially; microservice extraction requires evidence, ownership, operational design, and a new ADR (ADR-009).
 - Keycloak for human OIDC/OAuth2 identity; RFx backend for device identity and business authorization.
 - PostgreSQL 16/PostGIS as system of record; Redis-backed queue; MinIO object storage.
-- React/Leaflet with GeoServer, MapProxy, and policy-compliant OSM reuse.
+- React with TypeScript and Ant Design for the dashboard design system; React Leaflet/Leaflet for maps, with GeoServer, MapProxy, and policy-compliant OSM reuse (ADR-007).
 - Docker Compose for reproducible local/integration environments.
 - Open/Developer capabilities first; Diag deferred.
 - Contract-first, idempotent ingestion and backward-compatible evolution.

@@ -27,6 +27,9 @@ This register consolidates decisions that affect baseline acceptance and the fir
 | DR-015 | Minimum service SLOs, capacity assumptions, rate/payload limits, RPO, and RTO | Decision fields documented; numeric targets TBD | Product owner + platform lead | Contracts and pilot readiness | API contract and operational readiness plan |
 | DR-016 | Monitoring, logs, traces, metrics, alerting, health/readiness, and sensitive-data redaction platform | Minimum signals/semantics proposed; platform/thresholds TBD | Platform lead + security owner | Phase 1 foundation | Operational readiness plan and threat model |
 | DR-017 | Named baseline approver(s), accepted commit, date, and exceptions | TBD | Project owner | Baseline acceptance | Engineering agreement acceptance record |
+| DR-018 | Dashboard design system: React + TypeScript + Ant Design; React Leaflet/Leaflet for maps | Accepted | Project owner | Resolved; implementation remains Phase 4 | ADR-007 and toolchain selection record |
+| DR-019 | Backend design approach: pragmatic Domain-Driven Design within ASP.NET Core modular monolith/API plus .NET workers | Accepted | Project owner | Resolved | ADR-008 and backend architecture |
+| DR-020 | Initial deployment architecture: ASP.NET Core modular monolith plus separately deployable .NET workers; evidence-based microservice extraction only | Accepted | Project owner | Resolved | ADR-009 and backend/system architecture |
 
 ## Decision protocol
 

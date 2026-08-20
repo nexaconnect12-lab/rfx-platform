@@ -14,7 +14,7 @@ Milestone ownership, entry/exit evidence, and required role assignments are defi
 
 ## Phase 1 — contracts and executable foundation
 
-After acceptance: establish repository structure, pinned toolchains, Docker Compose infrastructure, initial threat/data model, OpenAPI skeleton, migrations, observability conventions, and CI quality gates.
+After acceptance: establish the DDD-oriented modular-monolith solution structure, API and worker deployment boundaries, architecture tests, ubiquitous-language glossary and first-slice aggregate boundaries, pinned toolchains, Docker Compose infrastructure, initial threat/data model, OpenAPI skeleton, migrations, observability conventions, and CI quality gates.
 
 ## Phase 2 — RFxPro vertical slice
 
@@ -26,7 +26,7 @@ Session UI/history, maps, NEI/cell reference import and matching, speed testing,
 
 ## Phase 4 — dashboard and geospatial delivery
 
-Keycloak login, scoped query APIs, React/Leaflet dashboard, GeoServer publication, MapProxy/OSM reuse, reports, audits, and operational readiness.
+Keycloak login, scoped query APIs, React/TypeScript dashboard using the Ant Design system, React Leaflet/Leaflet maps, GeoServer publication, MapProxy/OSM reuse, reports, audits, and operational readiness.
 
 ## Phase 5 — production readiness
 

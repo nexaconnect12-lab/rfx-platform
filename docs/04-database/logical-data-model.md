@@ -4,6 +4,8 @@ Status: **Proposed — not approved DDL or migration content**
 
 ## Entities
 
+This logical model supports the Domain-Driven Design direction in ADR-008. Tables and EF Core mappings do not define aggregate boundaries by themselves; aggregate boundaries are established by invariants and transaction needs.
+
 | Entity | Purpose | Required relationships/invariants |
 |---|---|---|
 | Tenant | Root business/authorization boundary | Immutable ID; owns projects, devices, memberships, sessions |
@@ -30,6 +32,14 @@ Status: **Proposed — not approved DDL or migration content**
 - Raw facts and derived values are stored separately.
 - Keycloak owns its own schema/database and migrations.
 
+## DDD modeling guidance
+
+- Treat `Device`, `CollectionSession`, and `IngestionBatch` as initial aggregate candidates subject to use-case validation.
+- Keep high-volume measurements outside a single session object graph; process and persist them through admitted batch scope.
+- Do not create database foreign-key navigation behavior that permits bypassing tenant/project authorization.
+- Use database constraints as defense in depth for domain invariants, tenancy, idempotency, and immutable admitted-batch identity.
+- Keep EF Core persistence types/configuration from leaking into the domain model where that coupling would distort domain behavior.
+
 ## Durable handoff recommendation
 
 Use a PostgreSQL transactional outbox:
@@ -53,4 +63,3 @@ The exact queue library remains DR-008. This recommendation resolves the archite
 - retention periods and deletion/anonymization mechanics.
 
 No source HLD/LLD DDL may be converted into migrations until this logical model, measurement dictionary, privacy policy, and OpenAPI contract are accepted.
-

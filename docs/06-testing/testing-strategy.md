@@ -8,7 +8,9 @@ Testing follows risk: measurement correctness, offline durability, idempotency, 
 
 ## Layers
 
-- Unit tests for domain rules, normalization, state machines, authorization, batching, and retry decisions.
+- Infrastructure-free unit tests for DDD aggregates, value objects, domain policies/rules, normalization, state machines, authorization decisions, batching, and retry decisions.
+- Application-use-case tests for orchestration, transactions, authorization context, idempotency, and mapping across boundaries.
+- Architecture tests enforcing inward dependencies, module ownership, prohibited infrastructure references from domain code, and approved cross-module dependencies.
 - Property/contract tests for measurement validation and idempotency invariants.
 - Android instrumentation tests for Room migrations, persistence, WorkManager, process death, permissions, and lifecycle.
 - Backend integration tests using real PostgreSQL/PostGIS, Redis, MinIO, and representative Keycloak tokens/configuration.

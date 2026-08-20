@@ -25,6 +25,9 @@ This is the review gate that determines whether the repository contains enough a
 ## C. Architecture and decisions
 
 - [x] Accept ASP.NET Core and .NET Worker Services as the main backend platform (ADR-001).
+- [x] Accept pragmatic Domain-Driven Design for backend business rules and module boundaries (ADR-008); detailed aggregate and solution structure remain initialization decisions.
+- [x] Accept a modular monolith plus separately deployable .NET workers as the initial backend architecture; microservices require evidence and a new ADR (ADR-009).
+- [x] Accept React + TypeScript + Ant Design as the dashboard design system and React Leaflet/Leaflet for maps (ADR-007); implementation remains deferred to the dashboard phase.
 - [ ] Accept, revise, or explicitly defer ADR-002 through ADR-006.
 - [ ] Approve Android shared-core boundaries for the first slice.
 - [ ] Approve durable admission and API-to-worker handoff architecture.
